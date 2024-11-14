@@ -46,6 +46,7 @@ $userrolename = $_SESSION['session_role_name'];
     <meta name="description" content="Responsive Bootstrap 5 Dashboard Template">
     <meta name="author" content="ThemePixels">
 
+
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo $baseUrl; ?>/includes/assets/img/favicon.png">
 

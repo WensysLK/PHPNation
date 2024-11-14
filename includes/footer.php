@@ -89,7 +89,7 @@
     });
 
     function fetchJobs(selectElement) {
-        fetch('./api-requests/fetch_jobs_api.php') // Adjust the path to your fetch_jobs.php file
+        fetch('applications/api-requests/fetch_jobs_api.php') // Adjust the path to your fetch_jobs.php file
             .then(response => response.json())
             .then(data => {
                 // Clear previous options

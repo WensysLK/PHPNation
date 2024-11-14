@@ -20,14 +20,14 @@ if ($position !== false) {
 
 
 // Define the base URL dynamically
-$baseUrl = $protocol . $host . $folder;
-
+//$baseUrl = $protocol . $host . $folder;
+$baseUrl = "http://localhost/projects/PHPNation";
 
 
 // Database connection settings
 define('DB_SERVER', 'localhost'); // Your database server (usually localhost)
-define('DB_USERNAME', 'terrance'); // Your database username
-define('DB_PASSWORD', 'Admin@123321'); // Your database password
+define('DB_USERNAME', 'root'); // Your database username
+define('DB_PASSWORD', 'f-420248'); // Your database password
 define('DB_NAME', 'nationscrm'); // Your database name
 
 // Create a connection using the constants
