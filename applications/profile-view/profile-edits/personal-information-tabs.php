@@ -32,10 +32,10 @@ if (isset($_GET['client_id'])) {
         }
 
         // Fetch contact information from the `contact_information` table
-       /* $sqlContact = "SELECT `applicant_email`, `applicant_landphone`, `applicant_phone`,`applicant_phone2`,`applicant_add1`,`applicant_add2`,`applicant_province`,`applicant_city`,`applicant_gsdevision` FROM `contact_information` LEFT JOIN `provinces` ON contact_information.applicant_province = provinces.id WHERE `applicant_id` = ? AND softdeletestatus=1";*/
+        /* $sqlContact = "SELECT `applicant_email`, `applicant_landphone`, `applicant_phone`,`applicant_phone2`,`applicant_add1`,`applicant_add2`,`applicant_province`,`applicant_city`,`applicant_gsdevision` FROM `contact_information` LEFT JOIN `provinces` ON contact_information.applicant_province = provinces.id WHERE `applicant_id` = ? AND softdeletestatus=1";*/
 
         $sqlContact = "
-    SELECT c.`applicant_email`, c.`arecodeland` ,c.`applicant_landphone`,c.`areacodephone1`, c.`applicant_phone`,c.`areacodephone2`, c.`applicant_phone2`, 
+    SELECT c.`applicant_email`,c.`applicant_landphone`, c.`applicant_phone`, c.`applicant_phone2`, 
            c.`applicant_add1`, c.`applicant_add2`, c.`applicant_province`, c.`applicant_city`, 
            c.`applicant_gsdevision`, p.`name` AS `province_name`, ci.`name` AS `cityname`, gs.`name` AS `gs_name`
     FROM `contact_information` c
@@ -50,8 +50,8 @@ if (isset($_GET['client_id'])) {
         $contact = $result7->fetch_assoc(); // Fetch the contact details
 
         // Fetch driving license information from the `driving_license` table
-       /* $sqlLicense = "SELECT d.`License_Type`, d. `document_Type`, d. `License_Country`, d. `License_Expiry`, c.`CountryName` FROM `driving_license_deatils` d LEFT JOIN   `list_of_countries` c ON d.`License_Country`= c.`countryId` WHERE d.`LicneseClinetId` = ? AND d.softdeletestatus=1";*/
-       $sqlLicense = "SELECT
+        /* $sqlLicense = "SELECT d.`License_Type`, d. `document_Type`, d. `License_Country`, d. `License_Expiry`, c.`CountryName` FROM `driving_license_deatils` d LEFT JOIN   `list_of_countries` c ON d.`License_Country`= c.`countryId` WHERE d.`LicneseClinetId` = ? AND d.softdeletestatus=1";*/
+        $sqlLicense = "SELECT
     d.`LicenseId`,
     d.`LicneseClinetId`,    
     d.`License_Type`, 
@@ -162,8 +162,7 @@ WHERE
                     <th>Mobile Phone</th>
                     <td><?php echo $contact['areacodephone1'] ."-". $contact['applicant_phone']; ?></td>
                     <th>Alternate Phone</th>
-                    <td><?php echo $contact['areacodephone2'] ."-". $contact['applicant_phone2']; ?></td>
-                </tr>
+                    <td><?php echo $contact['areacodephone2'] ."-". $contact['applicant_phone2']; ?></td>                </tr>
                 <tr style="background-color: #f2f2f2;">
                     <th>Address</th>
                     <td colspan="3"><?php echo $contact['applicant_add1'] . ", " . $contact['applicant_add2']; ?></td>

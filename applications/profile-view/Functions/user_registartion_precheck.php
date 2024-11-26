@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
        
         // Redirect to registration page
-        header("Location: ../client_registration.php");
+        header("Location: ../../client_registration.php");
         exit();
     }
     elseif (isset($_POST['saveExit'])) {

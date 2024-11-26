@@ -41,7 +41,7 @@ $result = $conn->query($sql);
                         <td>
                             <a href="followup.php?lead_id=<?php echo $row['id']; ?>"><button
                                     class="btn btn-sm btn-info">Follow Up</button></a> |
-                            <a href="full_registration.php?id=<?php echo $row['id']; ?>"><button
+                            <a href="<?php echo $baseUrl; ?>/applications/client_registration.php"><button
                                     class="btn btn-sm btn-primary">Reg</button></a>
                             <a class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                 data-bs-target="#editLeadModal-<?php echo $row['id']; ?>">Edit</a>

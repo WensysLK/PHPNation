@@ -14,7 +14,7 @@
                     <!-- Title -->
                     <div class="mb-3">
                         <label for="subAgentTitle" class="form-label">Title</label>
-                        <select id="subAgentTitle" class="form-control" name="title" required>
+                        <select id="subAgentTitle" class="form-control" name="title">
                             <option value="">Select a title</option>
                             <option value="Mr.">Mr.</option>
                             <option value="Ms.">Ms.</option>
@@ -26,25 +26,25 @@
                     <!-- First Name -->
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" name="firstName" required>
+                        <input type="text" class="form-control" id="firstName" name="firstName" >
                     </div>
 
                     <!-- Last Name -->
                     <div class="mb-3">
                         <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" name="lastName" required>
+                        <input type="text" class="form-control" id="lastName" name="lastName" >
                     </div>
 
                     <!-- Phone Number -->
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" >
                     </div>
 
                     <!-- NIC Number -->
                     <div class="mb-3">
                         <label for="nicNumber" class="form-label">NIC Number</label>
-                        <input type="text" class="form-control" id="nicNumber" name="nicNumber" required>
+                        <input type="text" class="form-control" id="nicNumber" name="nicNumber" >
                     </div>
 
                     <!-- Save Button -->

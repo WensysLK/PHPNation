@@ -24,26 +24,33 @@ if (isset($_POST['save'])) {
     $subAgentID = htmlspecialchars(trim($_POST['subAgentId']), ENT_QUOTES, 'UTF-8');
     $applicntBirth = htmlspecialchars(trim($_POST['dateofbirth']), ENT_QUOTES, 'UTF-8');
     $applicantStatus = "Completed";
-    
+
+
+if ($subAgentID){
+    $subagentId=$subagentId;
+}else{
+    $subagentId=1;
+}
+
     // Prepare SQL statement for inserting personal information
     $sqlpersonalinfo = "INSERT INTO applications (
         applicantTitle, applicatFname, applicantMname, applicantLname, applicantDob, 
         applicantPassno, applicantNICno, applicantPassdate, applicantNationality, applicanthight, 
         applicantWeight, applicantGender, appReligion, appRase, 
-        maritalestatus, how_foun_us, subagentId, applicantStatus
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        maritalestatus, how_foun_us, applicantStatus
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    var_dump($sqlpersonalinfo);
+
 
     // Prepare and bind parameters
     $stmt = $conn->prepare($sqlpersonalinfo);
-    $stmt->bind_param("ssssssssssssssssss", 
+    $stmt->bind_param("sssssssssssssssss",
         $applicantTItile, $applicantFname, $applicantMname, $applicantLname, $applicntBirth, 
         $passportNumner, $nicNumber, $passportIssuedate, $appNationality, $appheight, 
         $appweight, $appGnder, $appReligion, $appRase,  
-        $appMeritalStatus, $howFoundus, $subAgentID, $applicantStatus
+        $appMeritalStatus, $howFoundus, $applicantStatus
     );
-   
+//    var_dump($stmt->execute());die();
     // Execute statement
     if ($stmt->execute()) {
         // Store last inserted applicant ID in session

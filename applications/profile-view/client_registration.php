@@ -1,4 +1,4 @@
-<?php include('../includes/header.php');
+<?php include('../includes/header.php'); 
 
 // Initialize variables to handle cases where session data might be missing
 $applicantTitle = $applicantFname = $applicantMname = $applicantLname = $applicantDob = $passportNumber = $nicNumber = '';
@@ -17,10 +17,10 @@ if (isset($_SESSION['form_data'])) {
     $passportNumber = isset($form_data['passportNumber']) ? $form_data['passportNumber'] : '';
     $nicNumber = isset($form_data['nicNumber']) ? $form_data['nicNumber'] : '';
 
-
+    
     // Optionally, clear the session data if it's no longer needed
     //unset($_SESSION['form_data']);
-
+    
 
 
 
@@ -157,101 +157,99 @@ if (isset($_SESSION['form_data'])) {
                 </ul>
 
                 <form id="multiStepForm" action="form-functions/main_insert.php" method="POST"
-                      enctype="multipart/form-data">
-                    <div><!--                     Step 1: Personal Information -->
-                        <div class="step active" id="step1">
-                            <h4>Personal Information</h4>
+                    enctype="multipart/form-data">
+                    <!-- Step 1: Personal Information -->
+                    <div class="step active" id="step1">
+                        <h4>Personal Information</h4>
 
-                            <!-- Personal Information--->
-                            <?php include('form-parts/personal_information.php'); ?>
-
-                            <!--                        <button type="submit" class="btn btn-success" name="save">Submit</button>-->
-
-                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
-
-                        </div>
-                        <!--                     Step 2: Contact Details -->
-                        <div class="step" id="step2">
-                            <h4>Contact Details</h4>
-
-                            <!-- Contact Details -->
-                            <?php include('form-parts/contact-details.php'); ?>
-
-
-<!--                            <button type="submit" class="btn btn-secondary" name="save">Save</button>-->
-                            <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Previous</button>
-                            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
-                        </div>
-                        <!-- Step 3: Family Details -->
-                        <div class="step" id="step3">
-                            <h4>Family Details</h4>
-                            <!------------- Parents Details ------------->
-                            <?php include('form-parts/parents-details.php'); ?>
-
-                            <!------------- Spouce Details ---------------->
-                            <?php include('form-parts/spouce-details.php'); ?>
-
-                            <!------------- Sibiling Details ---------------->
-                            <?php include('form-parts/sibilings-details.php'); ?>
-
-                            <!------------- Guardian Details ---------------->
-                            <?php include('form-parts/guardian-details.php'); ?>
-
-                            <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
-                            <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Previous</button>
-                            <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next</button>
-                        </div>
-
-                        <!-- Step 4: Education & Professional Details -->
-                        <div class="step" id="step4">
-                            <h4>Skills & License</h4>
-
-                            <!------------ Skills ----------------->
-                                                    <?php include('form-parts/skills-details.php'); ?>
-                            <!---->
-                            <!--                        <!------------ Driving License ----------------->-->
-                                                    <?php include('form-parts/license-details.php'); ?>
-                            <!---->
-                            <!--                        <!------------ Language Details ----------------->-->
-                                                    <?php include('form-parts/language-details.php'); ?>
+                        <!-- Personal Information--->
+                        <?php include('form-parts/personal_information.php'); ?>
 
 
 
-
-
-                            <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
-                            <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Previous</button>
-                            <button type="button" class="btn btn-primary" onclick="nextStep(5)">Next</button>
-
-                        </div>
-                        <!-- Step 4: Education & Professional Details -->
-                        <div class="step" id="step5">
-                            <h4>Education & Professional Details</h4>
-
-                            <!------------ Educational Details ----------------->
-                                                    <?php include('form-parts/educational-details.php'); ?>
-
-
-                            <!------------ Professional Qualification Details ----------------->
-                                                    <?php include('form-parts/proffessional-qualification.php'); ?>
-
-
-                            <!------------ Work Experiance Details ----------------->
-                                                    <?php include('form-parts/work-experiance-details.php'); ?>
-
-                            <button type="submit" class="btn btn-secondary" name="save">Save</button>
-                            <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Previous</button>
-
-<!--                            <button type="submit">Submit</button>-->
-                        </div>
+                        <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
+                        <button type="button" class="btn btn-primary" onclick="nextStep(2)">Next</button>
                     </div>
 
+                    <!-- Step 2: Contact Details -->
+                    <div class="step" id="step2">
+                        <h4>Contact Details</h4>
+
+                        <!-- Contact Details -->
+                        <?php include('form-parts/contact-details.php'); ?>
+
+
+                        <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                    </div>
+
+                    <!-- Step 3: Family Details -->
+                    <div class="step" id="step3">
+                        <h4>Family Details</h4>
+                        <!------------- Parents Details ------------->
+                        <?php include('form-parts/parents-details.php'); ?>
+
+                        <!------------- Spouce Details ---------------->
+                        <?php include('form-parts/spouce-details.php'); ?>
+
+                        <!------------- Sibiling Details ---------------->
+                        <?php include('form-parts/sibilings-details.php'); ?>
+
+                        <!------------- Guardian Details ---------------->
+                        <?php include('form-parts/guardian-details.php'); ?>
+
+                        <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(4)">Next</button>
+                    </div>
+
+                    <!-- Step 4: Education & Professional Details -->
+                    <div class="step" id="step4">
+                        <h4>Skills & License</h4>
+
+                        <!------------ Skills ----------------->
+                        <?php include('form-parts/skills-details.php'); ?>
+
+                        <!------------ Driving License ----------------->
+                        <?php include('form-parts/license-details.php'); ?>
+
+                        <!------------ Language Details ----------------->
+                        <?php include('form-parts/language-details.php'); ?>
 
 
 
+
+
+                        <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(3)">Previous</button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep(5)">Next</button>
+
+                    </div>
+                    <!-- Step 4: Education & Professional Details -->
+                    <div class="step" id="step5">
+                        <h4>Education & Professional Details</h4>
+
+                        <!------------ Educational Details ----------------->
+                        <?php include('form-parts/educational-details.php'); ?>
+
+
+                        <!------------ Professional Qualification Details ----------------->
+                        <?php include('form-parts/proffessional-qualification.php'); ?>
+
+
+                        <!------------ Work Experiance Details ----------------->
+                        <?php include('form-parts/work-experiance-details.php'); ?>
+
+                        <!--<button type="submit" class="btn btn-secondary" name="save">Save</button>-->
+                        <button type="button" class="btn btn-secondary" onclick="prevStep(4)">Previous</button>
+                        <button type="submit" class="btn btn-success" name="save">Submit</button>
+                    </div>
                 </form>
 
 
+
+                <!-- End custom forms -->
             </div>
         </div>
     </div>
@@ -310,7 +308,7 @@ if (isset($_SESSION['form_data'])) {
     });
     </script>
 
-
+    <?php// include('form-parts/control-scripts/control-scripts.php'); ?>
 </body>
 
 </html>
