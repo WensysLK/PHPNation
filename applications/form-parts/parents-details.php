@@ -8,7 +8,7 @@
         <div class="col p-2">
             <label for="fatherDOB" class="form-label">Date of Birth</label>
             <input type="date" class="form-control" id="fatherDOB" name="fatherDOB"
-                onchange="calculateAgeparents('father')">
+                onchange="calculateAgeFather('father')">
         </div>
         <div class="col p-2">
             <label for="fatherAge" class="form-label">Age</label>
@@ -49,7 +49,7 @@
         <div class="col p-2">
             <label for="motherDOB" class="form-label">Date of Birth</label>
             <input type="date" class="form-control" id="motherDOB" name="motherDOB"
-                onchange="calculateAgeparents('mother')">
+                onchange="calculateAgeMother('mother')">
         </div>
         <div class="col p-2">
             <label for="motherAge" class="form-label">Age</label>
@@ -77,3 +77,41 @@
             <input type="file" class="form-control" id="motherNICback" name="motherNICbackcopy">
         </div>-->
     </div>
+    <script>
+        function calculateAgeFather(){
+            const inputField = document.getElementById("fatherDOB"); // Get the input element
+            const value = inputField.value;
+            alert(value);
+            const birthDate = new Date(value); // Convert the birthday string to a Date object
+            const today = new Date(); // Get today's date
+
+            let age = today.getFullYear() - birthDate.getFullYear(); // Calculate the difference in years
+            const monthDiff = today.getMonth() - birthDate.getMonth(); // Calculate the month difference
+
+            // Adjust age if the birthday hasn't occurred yet this year
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            console.log(age)
+            document.getElementById("fatherAge").value=age;
+            $('#fatherAge').text(age);
+            // return age;
+        }
+        function calculateAgeMother(){
+            const inputField = document.getElementById("motherDOB"); // Get the input element
+            const value = inputField.value;
+            alert(value);
+            const birthDate = new Date(value); // Convert the birthday string to a Date object
+            const today = new Date(); // Get today's date
+
+            let age = today.getFullYear() - birthDate.getFullYear(); // Calculate the difference in years
+            const monthDiff = today.getMonth() - birthDate.getMonth(); // Calculate the month difference
+
+            // Adjust age if the birthday hasn't occurred yet this year
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            console.log(age)
+            document.getElementById("motherAge").value=age;
+        }
+    </script>

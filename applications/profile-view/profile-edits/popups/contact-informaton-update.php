@@ -10,7 +10,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="registrationForm" method="post" action="Functions/user_registartion_precheck.php">
+                <form id="registrationForm" method="post" action="Functions/user_contact-details_edit_precheck.php">
+
+                    <input type="hidden" value="<?php echo $applicant['applicationID']; ?>" name="clientID">
+
 
                     <div class="row">
                         <div class="col p-2">
@@ -20,18 +23,18 @@
                         <div class="col p-2">
                             <label class="form-label">Land Phone</label>
                             <div class="input-group">
-                                <select name="land_area_code" class="form-select" value="<?php echo $contact['applicant_landphone']; ?>" id="landAreaCode">
-                                    <option value="">Select Area Code</option>
-                                </select>
-                                <input type="text" class="form-control" placeholder="Land Phone No" name="clphone">
+<!--                                <select name="land_area_code" class="form-select" value="--><?php //echo $contact['applicant_landphone']; ?><!--" id="landAreaCode">-->
+<!--                                    <option value="">Select Area Code</option>-->
+<!--                                </select>-->
+                                <input type="text" class="form-control" placeholder="Land Phone No" name="clphone" value="<?php echo $contact['applicant_landphone']; ?>">
                             </div>
                         </div>
                         <div class="col p-2">
                             <label class="form-label">Mobile No (1)</label>
                             <div class="input-group">
-                                <select name="mobile_area_code1" class="form-select" id="mobileAreaCode1">
-                                    <option value="">Select Area Code</option>
-                                </select>
+<!--                                <select name="mobile_area_code1" class="form-select" id="mobileAreaCode1">-->
+<!--                                    <option value="">Select Area Code</option>-->
+<!--                                </select>-->
                                 <input type="text" class="form-control" id="mobileNumber1" value="<?php echo $contact['applicant_phone']; ?>" placeholder="Phone No"
                                     name="cphone2">
                             </div>
@@ -42,11 +45,11 @@
                         <div class="col p-2">
                             <label class="form-label">Mobile No (2)</label>
                             <div class="input-group">
-                                <select name="mobile_area_code2" class="form-select" id="mobileAreaCode2">
-                                    <option value="">Select Area Code</option>
-                                </select>
+<!--                                <select name="mobile_area_code2" class="form-select" id="mobileAreaCode2">-->
+<!--                                    <option value="">Select Area Code</option>-->
+<!--                                </select>-->
                                 <input type="text" class="form-control" id="mobileNumber2" value="<?php echo $contact['applicant_phone']; ?>" placeholder="Phone No"
-                                    name="cphone">
+                                    name="cphone3">
                             </div>
                             <div id="messagingIcons2">
                                 <!-- Icons for mobile number 2 will be dynamically inserted here -->
@@ -68,13 +71,19 @@
                         </div>
                         <div class="col p-2">
                             <label class="form-label">Province</label>
-                            <select class="form-control" id="provinceup" value="<?php echo $contact['province_name']; ?>" name="cprovince">
+<!--                            <input type="text" class="form-control" id="provinceup"-->
+<!--                                   placeholder="Province" value="--><?php //echo $contact['province_name']; ?><!--" name="cprovince">-->
+
+                                                        <select class="form-control" id="provinceup" value="<?php echo $contact['province_name']; ?>" name="cprovince">
                                 <option value="">Select Province</option>
                             </select>
                             
                         </div>
                         <div class="col p-2">
                             <label class="form-label">City</label>
+<!--                            <input type="text" class="form-control" id="cityup"-->
+<!--                                   placeholder="City" value="--><?php //echo $contact['cityname']; ?><!--" name="ccity">-->
+
                             <select class="form-control" id="cityup" name="ccity">
         <!-- Pre-populate the currently selected city from the database -->
         <option value="<?php echo $contact['city_id']; ?>" selected><?php echo $contact['cityname']; ?></option>
@@ -83,6 +92,8 @@
                         </div>
                         <div class="col p-2">
                             <label class="form-label">Gramasevaka Division</label>
+<!--                            <input type="text" class="form-control" id="gsdevisionup"-->
+<!--                                   placeholder="City" value="--><?php //echo $contact['gs_name']; ?><!--" name="gsdevision">-->
                             <select class="form-control" id="gsdevisionup" value="<?php echo $contact['gs_name']; ?>" name="gsdevision">
                                 <option value="">Select GS Division</option>
                             </select>
@@ -101,7 +112,66 @@
         </div>
     </div>
 </div>
+<script>
+    // Ensure the script runs after the DOM is fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fetch provinces from the server
+        fetch('api-requests-edit/fetch_provinces.php')
+            .then(response => response.json())
+            .then(data => {
+                const provinceSelect = document.getElementById('provinceup');
+                data.provinces.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;  // Province ID from the database
+                    option.text = province.name;
+                    provinceSelect.add(option);
+                });
+            })
+            .catch(error => console.error('Error fetching provinces:', error));
+    });
 
+    // Fetch cities when a province is selected
+    document.getElementById('province').addEventListener('change', function() {
+        const provinceId = this.value;
+        const citySelect = document.getElementById('city');
+        citySelect.innerHTML = '<option value="">Select City</option>';  // Clear previous options
+
+        if (provinceId) {
+            fetch(`api-requests-edit/fetch_cities.php?province_id=${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.cities.forEach(city => {
+                        const option = document.createElement('option');
+                        option.value = city.id;  // City ID from the database
+                        option.text = city.name;
+                        citySelect.add(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching cities:', error));
+        }
+    });
+
+    // Fetch GS divisions when a city is selected
+    document.getElementById('city').addEventListener('change', function() {
+        const cityId = this.value;
+        const gsDivisionSelect = document.getElementById('gsdevision');
+        gsDivisionSelect.innerHTML = '<option value="">Select GS Division</option>';  // Clear previous options
+
+        if (cityId) {
+            fetch(`api-requests-edit/fetch_gs_divisions.php?city_id=${cityId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.gs_divisions.forEach(gsDivision => {
+                        const option = document.createElement('option');
+                        option.value = gsDivision.id;  // GS Division ID from the database
+                        option.text = gsDivision.name;
+                        gsDivisionSelect.add(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching GS divisions:', error));
+        }
+    });
+</script>
 <script>
 (function() {
     'use strict'
@@ -130,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectedProvince = "<?php echo $contact['province_name']; ?>"; // Province from the database
 
     // Fetch provinces using the API request
-    fetch('/nationscrm/applications/api-requests/fetch_provinces.php')  // Replace with your actual API URL
+    fetch('api-requests-edit/fetch_provinces.php')  // Replace with your actual API URL
         .then(response => response.json())
         .then(data => {
             // Populate the province dropdown
@@ -157,7 +227,7 @@ document.getElementById('provinceup').addEventListener('change', function() {
     citySelect.innerHTML = '<option value="">Select City</option>';  // Clear previous options
 
     if (provinceId) {
-        fetch(`/nationscrm/applications/api-requests/fetch_cities.php?province_id=${provinceId}`)
+        fetch(`api-requests-edit/fetch_cities.php?province_id=${provinceId}`)
             .then(response => response.json())
             .then(data => {
                 const selectedCity = "<?php echo $contact['cityname']; ?>";  // City name from the database
@@ -186,7 +256,7 @@ document.getElementById('cityup').addEventListener('change', function() {
     gsDivisionSelect.innerHTML = '<option value="">Select GS Division</option>';  // Clear previous options
 
     if (cityId) {
-        fetch(`/nationscrm/applications/api-requests/fetch_gs_divisions.php?city_id=${cityId}`)
+        fetch(`api-requests-edit/fetch_gs_divisions.php?city_id=${cityId}`)
             .then(response => response.json())
             .then(data => {
                 data.gs_divisions.forEach(gsDivision => {

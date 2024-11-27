@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="registrationForm" method="post" action="Functions/user_registartion_precheck.php">
+                <form id="registrationForm" method="post" action="Functions/user_edit_precheck.php">
                     <div class="row">
                         <div class="col">
                                 <input type="hidden" value="<?php echo $applicant['applicationID']; ?>" name="clientID">

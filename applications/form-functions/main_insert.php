@@ -66,7 +66,8 @@ $session_user_id = $_SESSION['session_id'];
     mysqli_commit($conn);
 
     echo "All data inserted successfully!";
-    header("Location: https://tnr.wensys.lk/applications/view_all_applications.php");
+    header('Location: ../view_all_applications.php');
+//    header("Location: /view_all_applications.php");
     //exit();
 } catch (Exception $e) {
     // If there is an error, rollback the transaction

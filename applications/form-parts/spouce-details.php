@@ -55,3 +55,23 @@
         <input type="file" class="form-control" name="spoucenicback" id="">
     </div>
 </div>
+
+<script>
+    function calculateAgespouce(){
+        const inputField = document.getElementById("spouseDOB"); // Get the input element
+        const value = inputField.value;
+        alert(value);
+        const birthDate = new Date(value); // Convert the birthday string to a Date object
+        const today = new Date(); // Get today's date
+
+        let age = today.getFullYear() - birthDate.getFullYear(); // Calculate the difference in years
+        const monthDiff = today.getMonth() - birthDate.getMonth(); // Calculate the month difference
+
+        // Adjust age if the birthday hasn't occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        console.log(age)
+        document.getElementById("spouseAge").value=age;
+    }
+</script>

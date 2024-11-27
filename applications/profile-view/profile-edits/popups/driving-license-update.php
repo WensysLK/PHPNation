@@ -8,33 +8,80 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="registrationForm" method="post" action="http://localhost/nationscrm/applications/profile-view/profile-edits/functions/update-license.php">
-                    <input type="hidden" name="license_id" id="licenseId">
-                    <input type="hidden" name="client_id" id="licenseClientId"> <!-- Add this if you need client ID -->
+                <form id="registrationForm" method="post" action="Functions/driving_license_update_precheck.php">
+
+                    <input type="hidden" name="license_id" id="licenseId"value="<?php echo $licenseNew['LicenseId']; ?>">
+                    <input type="hidden" name="client_id" id="licenseClientId"value="<?php echo $licenseNew['LicneseClinetId']; ?>"> <!-- Add this if you need client ID -->
                    
                     <div class="row">
                         <div class="col">
                             <label for="licenseType" class="form-label">License Type</label>
-                            <input type="text" class="form-control" id="licenseType" name="license_type" required>
+                            <input type="text" class="form-control" id="licenseType" name="license_type" value="<?php echo $licenseNew['License_Type']; ?>" required>
                         </div>
                         <div class="col">
                             <label for="documentType" class="form-label">Original/Copy</label>
-                            <select id="documentType" name="document_type" class="form-select form-control" required>
-                                <option value="none">Select</option>
-                                <option value="original">Original</option>
+                            <select id="documentType" name="document_type" class="form-select form-control" value="<?php echo $licenseNew['document_Type']; ?>" required>
+                               <?php if($licenseNew['document_Type']== "original") {?>
+                                <option value="original" selected>Original</option>
                                 <option value="copy">Copy</option>
+                                <?php }elseif ($licenseNew['document_Type']== "copy"){ ?>
+                                <option value="original" >Original</option>
+                                <option value="copy" selected>Copy</option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="col">
                             <label for="countryupate" class="form-label">Country</label>
                             <select id="countryupate" name="country" class="form-select form-control" required>
-                                <option value="">Select Country</option>
+                                <?php if($licenseNew['License_Country']== "1") {?>
+                                    <option value="1" selected>United States</option>
+                                    <option value="2">Canada</option>
+                                    <option value="3">Germany</option>
+                                    <option value="4">France</option>
+                                    <option value="5">Sri Lanka</option>
+                                    <option value="6">India</option>
+                                <?php }elseif ($licenseNew['License_Country']== "2"){ ?>
+                                    <option value="1" >United States</option>
+                                    <option value="2"selected>Canada</option>
+                                    <option value="3">Germany</option>
+                                    <option value="4">France</option>
+                                    <option value="5">Sri Lanka</option>
+                                    <option value="6">India</option>
+                                <?php }elseif ($licenseNew['License_Country']== "3"){  ?>
+                                <option value="1" >United States</option>
+                                <option value="2">Canada</option>
+                                <option value="3"selected>Germany</option>
+                                <option value="4">France</option>
+                                <option value="5">Sri Lanka</option>
+                                <option value="6">India</option>
+                                <?php }elseif ($licenseNew['License_Country']== "4"){  ?>
+                                <option value="1" >United States</option>
+                                <option value="2">Canada</option>
+                                <option value="3">Germany</option>
+                                <option value="4"selected>France</option>
+                                <option value="5">Sri Lanka</option>
+                                <option value="6">India</option>
+                                <?php }elseif ($licenseNew['License_Country']== "5"){  ?>
+                                <option value="1" >United States</option>
+                                <option value="2">Canada</option>
+                                <option value="3">Germany</option>
+                                <option value="4">France</option>
+                                <option value="5"selected>Sri Lanka</option>
+                                <option value="6">India</option>
+                                <?php }elseif ($licenseNew['License_Country']== "6"){  ?>
+                                <option value="1" >United States</option>
+                                <option value="2">Canada</option>
+                                <option value="3">Germany</option>
+                                <option value="4">France</option>
+                                <option value="5">Sri Lanka</option>
+                                <option value="6"selected>India</option>
+                                  <?php }?>
                                 <!-- Options will be populated dynamically by JavaScript -->
                             </select>
                         </div>
                         <div class="col">
                             <label for="expiryDate" class="form-label">Expiry Date</label>
-                            <input type="date" class="form-control" id="expiryDate" name="expiry_date">
+                            <input type="date" class="form-control" id="expiryDate" name="expiry_date"value="<?php echo $licenseNew['License_Expiry']; ?>">
                         </div>
                         <div class="col">
                             <label for="attachment" class="form-label">Attachment</label>

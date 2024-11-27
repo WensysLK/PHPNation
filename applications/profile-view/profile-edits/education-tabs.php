@@ -1,6 +1,6 @@
-<a href="#" class="btn btn-primary btn-sm" style="float: right;">
-                    + Add New
-                </a>
+<a type="button"  class="btn btn-primary btn-sm" style="float: right;" data-bs-toggle="modal" data-bs-target="#eduAddinfonew">
+    + Add New
+</a>
 <?php
 // Check if 'client_id' is set in the URL
 if (isset($_GET['client_id'])) {
@@ -76,3 +76,54 @@ if (isset($_GET['client_id'])) {
     $stmt8->close();
 }
 ?>
+<div class="modal fade" id="eduAddinfonew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel3">Add Educational Qalification Details</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="registrationForm" method="post"  action="Functions/education_precheck.php"">
+                <input type="hidden" name="client_id" id="client_id" value="<?php echo $client_id ?>">
+
+                <div class="">
+                    <div id="educationContainer">
+                        <!-- Initial set of education fields -->
+                        <div class="education-entry row">
+                            <div class="col">
+                                <label>School Name</label>
+                                <input class="form-control" type="text" name="schoolname">
+                            </div>
+                            <div class="col">
+                                <label>OL/AL</label>
+                                <select name="edulevel" class="form-select form-control" onchange="handleEduLevelChange(this)"
+                                >
+                                    <option value="al">Advance Level</option>
+                                    <option value="ol">Ordinary Level</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="status" class="form-label ">Year</label>
+                                <input type="number" class="form-control" name="eduyear" id="eduyear">
+                            </div>
+                            <div class="col">
+                                <label for="status" class="form-label ">Attach Certificate</label>
+                                <input type="file" class="form-control" name="certificate" id="certificate">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+

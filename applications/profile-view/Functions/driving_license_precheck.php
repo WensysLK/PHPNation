@@ -1,12 +1,35 @@
 <?php 
 
-include('../../includes/db_config.php');
+include('../../../includes/db_config.php');
 session_start();
 // Check if the form was submitted
 
+$LicneseClinetId = isset($_POST['client_id']) ? $_POST['client_id'] : '';
+$License_Type = isset($_POST['license_type']) ? $_POST['license_type'] : '';
+$document_Type = isset($_POST['document_type']) ? $_POST['document_type'] : '';
+$License_Country = isset($_POST['country']) ? $_POST['country'] : '';
+$License_Expiry = isset($_POST['expiry_date']) ? $_POST['expiry_date'] : '';
+$softdeletestatus = 1;
+
+$saveandclose_sql = "INSERT INTO 
+        `driving_license_deatils`( 
+        `LicneseClinetId`, `License_Type`, 
+        `document_Type`, `License_Country`,
+        `License_Expiry`, 
+        `softdeletestatus`) 
+        VALUES 
+        ('$LicneseClinetId',
+        '$License_Type','$document_Type',
+        '$License_Country','$License_Expiry','$softdeletestatus')";
+           $stmt= $conn->query($saveandclose_sql);
+//$stmt->execute();
+header("Location: ../application-profile-edit.php?client_id=$LicneseClinetId");
+var_dump($LicneseClinetId,$License_Type,$document_Type,$License_Country,$License_Expiry,$softdeletestatus);die();
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check which button was clicked
-    $applicantTitle = isset($_POST['name-title']) ? $_POST['name-title'] : '';
+    $applicantTitle = isset($_POST['license_type']) ? $_POST['license_type'] : '';
     $applicantFname = isset($_POST['Cfname']) ? $_POST['Cfname'] : '';
     $applicantMname = isset($_POST['cmname']) ? $_POST['cmname'] : '';
     $applicantLname = isset($_POST['clname']) ? $_POST['clname'] : '';
@@ -17,7 +40,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['saveContineue'])) {
         // collect form data
         // Store data in session
-
         $_SESSION['form_data'] = [
             'applicantTitle' => $applicantTitle,
             'applicantFname' => $applicantFname,
@@ -28,22 +50,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'nicNumber' => $nicNumber,
         ];
 
-//        var_dump($_SESSION['form_data']);die();
+       
         // Redirect to registration page
-        header("Location: ../client_registration.php");
+        header("Location: ../../client_registration.php");
         exit();
     }
     elseif (isset($_POST['saveExit'])) {
-
         // collect form data
         $apptitle = $_POST['name-title'];
         $appFirstname = $_POST['Cfname'];
         $appMidname = $_POST['cmname'];
-        $appLname = $_POST['clname'];
+        $appLname = $_POST['clnam'];
         $appdatebirth = $_POST['dateofbirth'];
         $appPassport = $_POST['passportNumber'];
         $appNic = $_POST['nicNumber'];
-//        var_dump($apptitle,$appFirstname,$appMidname,$appLname,$appdatebirth,$appPassport,$appNic);die();
+        
 
         $saveandclose_sql = "INSERT INTO 
         `applications`( 
@@ -56,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         '$applicantFname','$applicantMname',
         '$applicantLname','$applicantDob','$passportNumber',
         '$nicNumber')";
-         $conn->query($saveandclose_sql);
+    $conn->query($saveandclose_sql);
         // Redirect or perform any action needed for this button
         header("Location: ../view_all_applications.php"); // Example redirect
         exit;
